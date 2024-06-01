@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahendra Kumar Exports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.5s ease; /* Transition for centering */
+            animation: fadeInDown 1s;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+        .login-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1em;
+            color: white;
+            background-color: rgb(126, 34, 206);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .login-button:hover {
+            background-color: #2575fc;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            transition: all 0.5s ease; /* Transition for navbar */
+            animation: fadeInDown 1s;
+        }
+        .navbar-brand {
+            font-size: 1.5em;
+        }
+        .navbar-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .navbar-links a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .navbar-links a:hover {
+            color: #cccccc;
+        }
+        .navbar-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: transparent;
+            transition: background-color 0.3s, height 0.3s;
+            border-radius: 2px;
+        }
+        .navbar-links a:hover::after {
+            background-color: #ccc;
+            height: 4px;
+        }
+
+        /* Keyframes */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Media Queries */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 0.9em;
+            }
+            .login-button {
+                padding: 12px 24px;
+                font-size: 0.9em;
+            }
+            .navbar {
+                flex-direction: column;
+            }
+            .navbar-links {
+                margin-top: 20px;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="navbar-brand">Mahendra Kumar Exports</div>
+            <div class="navbar-links">
+                <a href="#" class="navbar-link">Home</a>
+                <a href="#" class="navbar-link">About</a>
+                <a href="#" class="navbar-link">Third Link</a>
+                <a href="#" class="navbar-link">Fourth Link</a>
+            </div>
+        </div>
+        <div class="container">
+            <h1>Welcome to Mahendra Kumar Exports</h1>
+            <p>Your partner in quality exports</p>
+            <a href="login.html" class="login-button">Login</a>
+            
+        </div>
+    </header>
+</body>
+</html>
