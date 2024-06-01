@@ -16,6 +16,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     const user = users.find(u => u.username === username && u.password === password);
 
     if (user) {
+        alert('Login successful!');
         // Redirect the user to the specified URL
         window.location.href = user.redirectUrl;
     } else {
