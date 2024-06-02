@@ -6,7 +6,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
 
     console.log(`Attempting to login with username: ${username} and password: ${password}`);
 
-    fetch('users.csv')
+    fetch('https://drive.google.com/file/d/1G1Bx58F0ovAYmxUXj3kXdiwuVTOr15i3/view?usp=drive_link')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
