@@ -4,22 +4,24 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Simulated in-memory user store with redirection URLs
-    const users = [
-        { username: 'user1', password: 'password1', redirectUrl: 'https://www.google.com' },
-        { username: 'user2', password: 'password2', redirectUrl: 'https://www.facebook.com' },
-        { username: 'user3', password: 'password3', redirectUrl: 'index.html' }
-        // Add more users with their respective redirection URLs here
-    ];
-
-    // Check if user exists
-    const user = users.find(u => u.username === username && u.password === password);
-
-    if (user) {
-        alert('Login successful!');
-        // Redirect the user to the specified URL
-        window.location.href = user.redirectUrl;
-    } else {
-        alert('Invalid credentials');
-    }
+    fetch('server/authenticate.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Login successful!');
+            window.location.href = data.redirectUrl;
+        } else {
+            alert('Invalid credentials');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    });
 });
