@@ -4,14 +4,21 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
+    console.log(`Attempting to login with username: ${username} and password: ${password}`);
+
     fetch('/server/users.csv')
         .then(response => response.text())
         .then(data => {
+            console.log('CSV Data:', data);
+
             const users = parseCSV(data);
+            console.log('Parsed Users:', users);
+
             const user = users.find(u => u.username === username && u.password === password);
 
             if (user) {
                 alert('Login successful!');
+                console.log('Redirecting to:', user.redirectUrl);
                 window.location.href = user.redirectUrl;
             } else {
                 alert('Invalid credentials');
