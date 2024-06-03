@@ -8,6 +8,7 @@ body {
     align-items: center;
     height: 100vh;
 }
+
 .login-container {
     background-color: #ffffff;
     padding: 20px;
@@ -17,10 +18,12 @@ body {
     max-width: 400px;
     text-align: center;
 }
+
 .login-container h2 {
     margin-bottom: 20px;
     color: #333333;
 }
+
 .login-container input {
     width: 95%;
     padding: 10px;
@@ -29,6 +32,26 @@ body {
     border-radius: .5rem;
     font-size: 16px;
 }
+
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: calc(100% - 40px);
+    padding-right: 30px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
+
 .login-container button {
     width: 100%;
     padding: 10px;
@@ -40,9 +63,11 @@ body {
     font-size: 16px;
     transition: background-color 0.3s;
 }
+
 .login-container button:hover {
     background-color: #2575fc;
 }
+
 .login-container .forgot-password {
     margin-top: 10px;
     display: block;
@@ -50,7 +75,7 @@ body {
     text-decoration: none;
     font-size: 14px;
 }
+
 .login-container .forgot-password:hover {
     text-decoration: underline;
 }
-
