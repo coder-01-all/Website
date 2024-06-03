@@ -1,3 +1,12 @@
+document.getElementById('toggle-password').addEventListener('click', function () {
+    const passwordInput = document.getElementById('password');
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+
+    // Toggle the icon (optional, you can change the icon as per your preference)
+    this.textContent = type === 'password' ? '👁️' : '🙈';
+});
+
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
