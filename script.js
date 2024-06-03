@@ -1,21 +1,34 @@
-document.getElementById('toggle-password').addEventListener('click', function () {
-    const passwordInput = document.getElementById('password');
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
+document.addEventListener('DOMContentLoaded', function() {
+    const savedUsername = localStorage.getItem('username');
+    const savedPassword = localStorage.getItem('password');
 
-    // Toggle the icon (optional, you can change the icon as per your preference)
-    this.textContent = type === 'password' ? '👁️' : '🙈';
+    if (savedUsername && savedPassword) {
+        login(savedUsername, savedPassword, true);
+    }
+
+    document.getElementById('toggle-password').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        // Toggle the icon (optional, you can change the icon as per your preference)
+        this.textContent = type === 'password' ? '👁️' : '🙈';
+    });
+
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        login(username, password, false);
+    });
 });
 
-document.getElementById('login-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+function login(username, password, isAutoLogin) {
+    console.log(`Attempting to login with username: ${username}`);
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    console.log(`Attempting to login with username: ${username} and password: ${password}`);
-
-    fetch('server/users.csv')
+    fetch('users.csv')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -31,6 +44,11 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             const user = users.find(u => u.username === username && u.password === password);
 
             if (user) {
+                if (!isAutoLogin) {
+                    // Save username and password to local storage
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('password', password);
+                }
                 alert('Login successful!');
                 console.log('Redirecting to:', user.redirectUrl);
                 window.location.href = user.redirectUrl;
@@ -42,7 +60,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
         });
-});
+}
 
 function parseCSV(data) {
     const lines = data.split('\n');
@@ -57,4 +75,4 @@ function parseCSV(data) {
     }
 
     return users;
-}
+    }
