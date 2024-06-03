@@ -2,16 +2,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const savedUsername = localStorage.getItem('username');
     const savedPassword = localStorage.getItem('password');
 
-    if (savedUsername && savedPassword) {
-        login(savedUsername, savedPassword, true);
+    if (!savedUsername || !savedPassword) {
+        // If user is not logged in, redirect to the login page
+        window.location.href = 'login.html';
     }
 
     document.getElementById('toggle-password').addEventListener('click', function () {
         const passwordInput = document.getElementById('password');
         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
         passwordInput.setAttribute('type', type);
-
-        // Toggle the icon (optional, you can change the icon as per your preference)
         this.textContent = type === 'password' ? '👁️' : '🙈';
     });
 
@@ -28,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function login(username, password, isAutoLogin) {
     console.log(`Attempting to login with username: ${username}`);
 
-    fetch('server/users.csv')
+    fetch('users.csv')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -36,11 +35,7 @@ function login(username, password, isAutoLogin) {
             return response.text();
         })
         .then(data => {
-            console.log('CSV Data:', data);
-
             const users = parseCSV(data);
-            console.log('Parsed Users:', users);
-
             const user = users.find(u => u.username === username && u.password === password);
 
             if (user) {
@@ -74,4 +69,4 @@ function parseCSV(data) {
     }
 
     return users;
-    }
+}
