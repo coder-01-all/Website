@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function login(username, password, isAutoLogin) {
     console.log(`Attempting to login with username: ${username}`);
 
-    fetch('users.csv')
+    fetch('server/users.csv')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
