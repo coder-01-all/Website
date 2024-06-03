@@ -49,7 +49,6 @@ function login(username, password, isAutoLogin) {
                     localStorage.setItem('username', username);
                     localStorage.setItem('password', password);
                 }
-                alert('Login successful!');
                 console.log('Redirecting to:', user.redirectUrl);
                 window.location.href = user.redirectUrl;
             } else {
