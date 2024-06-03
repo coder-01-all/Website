@@ -15,14 +15,6 @@ document.getElementById('login-form').addEventListener('submit', function(event)
 
     console.log(`Attempting to login with username: ${username} and password: ${password}`);
 
-document.getElementById('login-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    console.log(`Attempting to login with username: ${username} and password: ${password}`);
-
     fetch('server/users.csv')
         .then(response => {
             if (!response.ok) {
@@ -66,9 +58,3 @@ function parseCSV(data) {
 
     return users;
 }
-
-        if (user1) {
-            window.location.href = user1.redirectUrl;
-        }
-    })
-    .catch(error => console.error('Error:', error));
