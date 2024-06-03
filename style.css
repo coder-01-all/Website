@@ -39,8 +39,8 @@ body {
 }
 
 .password-container input {
-    width: calc(100% - 40px);
-    padding-right: 33px;
+    width: 95%;
+    padding: 10px;
 }
 
 .toggle-password {
