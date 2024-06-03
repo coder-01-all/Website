@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 100%; /* Adjusted max-width to fit smaller screens */
+    margin: auto;
+    overflow: auto; /* Allow container to expand based on content */
+    min-width: 320px; /* Set a minimum width to prevent content from collapsing */
+    min-height: 100vh; /* Set a minimum height to fill the viewport */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #cccccc;
+}
+
+th, td {
+    padding: 8px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #6a11cb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2575fc;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    h2 {
+        font-size: 20px;
+    }
+
+    table, th, td {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
