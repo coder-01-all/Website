@@ -1,11 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const savedUsername = localStorage.getItem('username');
-    const savedPassword = localStorage.getItem('password');
-
-    if (!savedUsername || !savedPassword) {
-        // If user is not logged in, redirect to the login page
-        window.location.href = 'login.html';
-    }
 
     document.getElementById('toggle-password').addEventListener('click', function () {
         const passwordInput = document.getElementById('password');
