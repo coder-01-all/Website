@@ -1,3 +1,10 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const savedUsername = localStorage.getItem('username');
+    const savedPassword = localStorage.getItem('password');
+
+    if (savedUsername && savedPassword) {
+        login(savedUsername, savedPassword, true);
+    }
 
     document.getElementById('toggle-password').addEventListener('click', function () {
         const passwordInput = document.getElementById('password');
@@ -21,13 +28,18 @@ function login(username, password, isAutoLogin) {
 
     fetch('server/users.csv')
         .then(response => {
+            console.log('Fetch response:', response); // Debugging line
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             return response.text();
         })
         .then(data => {
+            console.log('CSV Data:', data);
+
             const users = parseCSV(data);
+            console.log('Parsed Users:', users);
+
             const user = users.find(u => u.username === username && u.password === password);
 
             if (user) {
@@ -36,6 +48,7 @@ function login(username, password, isAutoLogin) {
                     localStorage.setItem('username', username);
                     localStorage.setItem('password', password);
                 }
+                alert('Login successful!');
                 console.log('Redirecting to:', user.redirectUrl);
                 window.location.href = user.redirectUrl;
             } else {
