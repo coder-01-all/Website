@@ -27,6 +27,35 @@ function downloadPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    doc.autoTable({ html: '#excel-table' });
+    // Add autoTable plugin
+    const autoTable = doc.autoTable;
+
+    const table = document.getElementById('excel-table');
+    const rows = [];
+    const headers = [];
+
+    // Get headers
+    const headerCells = table.querySelectorAll('thead tr th');
+    headerCells.forEach(headerCell => {
+        headers.push(headerCell.innerText);
+    });
+
+    // Get rows
+    const rowCells = table.querySelectorAll('tbody tr');
+    rowCells.forEach(rowCell => {
+        const row = [];
+        const cells = rowCell.querySelectorAll('td');
+        cells.forEach(cell => {
+            row.push(cell.innerText);
+        });
+        rows.push(row);
+    });
+
+    // Use autoTable to create the PDF
+    doc.autoTable({
+        head: [headers],
+        body: rows,
+    });
+
     doc.save('table.pdf');
 }
