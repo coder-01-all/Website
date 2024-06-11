@@ -26,8 +26,6 @@ function loadExcelFile() {
 function downloadPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-
-    // Add autoTable plugin
     const autoTable = doc.autoTable;
 
     const table = document.getElementById('excel-table');
@@ -51,10 +49,21 @@ function downloadPDF() {
         rows.push(row);
     });
 
-    // Use autoTable to create the PDF
+    // Use autoTable to create the PDF with lines
     doc.autoTable({
         head: [headers],
         body: rows,
+        theme: 'grid', // Ensures lines are added in the table
+        styles: {
+            lineColor: [0, 0, 0], // Black color for lines
+            lineWidth: 0.1, // Line width
+        },
+        headStyles: {
+            fillColor: [211, 211, 211], // Light grey background for headers
+        },
+        alternateRowStyles: {
+            fillColor: [255, 255, 255], // White background for alternate rows
+        },
     });
 
     doc.save('table.pdf');
