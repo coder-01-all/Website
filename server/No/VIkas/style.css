@@ -10,12 +10,12 @@ body {
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 100%; /* Adjusted max-width to fit smaller screens */
+    max-width: 100%;
     margin: auto;
-    overflow: auto; /* Allow container to expand based on content */
-    min-width: 320px; /* Set a minimum width to prevent content from collapsing */
-    min-height: 100vh; /* Set a minimum height to fill the viewport */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    overflow: auto;
+    min-width: 320px;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 h2 {
