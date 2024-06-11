@@ -17,8 +17,15 @@ function loadExcelFile() {
             const workbook = XLSX.read(data, { type: 'array' });
             const firstSheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[firstSheetName];
-            const tableHTML = XLSX.utils.sheet_to_html(worksheet);
-            document.getElementById('excel-table').innerHTML = tableHTML;
+            const tableHTML = XLSX.utils.sheet_to_html(worksheet, { id: 'excel-table', editable: true });
+
+            // Debugging: Log the generated HTML
+            console.log("Generated HTML Table:", tableHTML);
+
+            document.getElementById('excel-table-container').innerHTML = tableHTML;
+
+            // Check if the table is inserted correctly
+            console.log("Inserted HTML Table:", document.getElementById('excel-table-container').innerHTML);
         })
         .catch(error => console.error('Error loading the Excel file:', error));
 }
@@ -26,11 +33,14 @@ function loadExcelFile() {
 function downloadPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-
-    // Add autoTable plugin
     const autoTable = doc.autoTable;
 
-    const table = document.getElementById('excel-table');
+    const table = document.querySelector('#excel-table-container table');
+    if (!table) {
+        console.error('Table not found!');
+        return;
+    }
+
     const rows = [];
     const headers = [];
 
@@ -39,6 +49,9 @@ function downloadPDF() {
     headerCells.forEach(headerCell => {
         headers.push(headerCell.innerText);
     });
+
+    // Debugging: Log the headers
+    console.log("Table Headers:", headers);
 
     // Get rows
     const rowCells = table.querySelectorAll('tbody tr');
@@ -51,11 +64,28 @@ function downloadPDF() {
         rows.push(row);
     });
 
-    // Use autoTable to create the PDF
+    // Debugging: Log the rows
+    console.log("Table Rows:", rows);
+
+    // Use autoTable to create the PDF with lines
     doc.autoTable({
         head: [headers],
         body: rows,
+        theme: 'grid', // Ensures lines are added in the table
+        styles: {
+            lineColor: [0, 0, 0], // Black color for lines
+            lineWidth: 0.1, // Line width
+        },
+        headStyles: {
+            fillColor: [211, 211, 211], // Light grey background for headers
+        },
+        alternateRowStyles: {
+            fillColor: [255, 255, 255], // White background for alternate rows
+        },
     });
+
+    // Debugging: Log the generated PDF document
+    console.log("Generated PDF Document:", doc);
 
     doc.save('table.pdf');
 }
