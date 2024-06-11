@@ -18,7 +18,7 @@ function loadExcelFile() {
             const firstSheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[firstSheetName];
             const tableHTML = XLSX.utils.sheet_to_html(worksheet);
-            document.getElementById('excel-table').innerHTML = tableHTML;
+            document.getElementById('excel-table-container').innerHTML = tableHTML;
         })
         .catch(error => console.error('Error loading the Excel file:', error));
 }
@@ -28,7 +28,7 @@ function downloadPDF() {
     const doc = new jsPDF();
     const autoTable = doc.autoTable;
 
-    const table = document.getElementById('excel-table');
+    const table = document.querySelector('#excel-table-container table');
     const rows = [];
     const headers = [];
 
