@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h2>Excel File Viewer</h2>
-        <table id="excel-table"></table>
+        <div id="excel-table-container">
+            <table id="excel-table"></table>
+        </div>
         <button id="download-pdf">Download as PDF</button>
     </div>
     <script src="script.js"></script>
