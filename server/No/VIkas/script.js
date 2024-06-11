@@ -17,11 +17,12 @@ function loadExcelFile() {
             const workbook = XLSX.read(data, { type: 'array' });
             const firstSheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[firstSheetName];
-            const tableHTML = XLSX.utils.sheet_to_html(worksheet, { id: 'excel-table', editable: true });
+            const tableHTML = XLSX.utils.sheet_to_html(worksheet);
 
             // Debugging: Log the generated HTML
             console.log("Generated HTML Table:", tableHTML);
 
+            // Insert the table HTML into the container
             document.getElementById('excel-table-container').innerHTML = tableHTML;
 
             // Check if the table is inserted correctly
@@ -41,8 +42,8 @@ function downloadPDF() {
         return;
     }
 
-    const rows = [];
     const headers = [];
+    const rows = [];
 
     // Get headers
     const headerCells = table.querySelectorAll('thead tr th');
@@ -84,8 +85,6 @@ function downloadPDF() {
         },
     });
 
-    // Debugging: Log the generated PDF document
-    console.log("Generated PDF Document:", doc);
-
+    // Save the PDF
     doc.save('table.pdf');
 }
