@@ -17,10 +17,7 @@ function loadExcelFile() {
             const workbook = XLSX.read(data, { type: 'array' });
             const firstSheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[firstSheetName];
-            const tableHTML = XLSX.utils.sheet_to_html(worksheet);
-
-            // Debugging: Log the generated HTML
-            console.log("Generated HTML Table:", tableHTML);
+            const tableHTML = XLSX.utils.sheet_to_html(worksheet, { id: 'excel-table' });
 
             // Insert the table HTML into the container
             document.getElementById('excel-table-container').innerHTML = tableHTML;
@@ -34,54 +31,31 @@ function loadExcelFile() {
 function downloadPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    const autoTable = doc.autoTable;
-
     const table = document.querySelector('#excel-table-container table');
+
     if (!table) {
         console.error('Table not found!');
         return;
     }
 
-    const headers = [];
-    const rows = [];
-
-    // Get headers
-    const headerCells = table.querySelectorAll('thead tr th');
-    headerCells.forEach(headerCell => {
-        headers.push(headerCell.innerText);
-    });
-
-    // Debugging: Log the headers
-    console.log("Table Headers:", headers);
-
-    // Get rows
-    const rowCells = table.querySelectorAll('tbody tr');
-    rowCells.forEach(rowCell => {
-        const row = [];
-        const cells = rowCell.querySelectorAll('td');
-        cells.forEach(cell => {
-            row.push(cell.innerText);
-        });
-        rows.push(row);
-    });
-
-    // Debugging: Log the rows
-    console.log("Table Rows:", rows);
+    const rows = Array.from(table.querySelectorAll('tr')).map(tr =>
+        Array.from(tr.querySelectorAll('th, td')).map(td => td.textContent.trim())
+    );
 
     // Use autoTable to create the PDF with lines
     doc.autoTable({
-        head: [headers],
-        body: rows,
-        theme: 'grid', // Ensures lines are added in the table
+        head: [rows[0]],
+        body: rows.slice(1),
+        theme: 'grid',
         styles: {
-            lineColor: [0, 0, 0], // Black color for lines
-            lineWidth: 0.1, // Line width
+            lineColor: [0, 0, 0],
+            lineWidth: 0.1,
         },
         headStyles: {
-            fillColor: [211, 211, 211], // Light grey background for headers
+            fillColor: [211, 211, 211],
         },
         alternateRowStyles: {
-            fillColor: [255, 255, 255], // White background for alternate rows
+            fillColor: [255, 255, 255],
         },
     });
 
