@@ -1,11 +1,3 @@
-document.getElementById('download-pdf').addEventListener('click', printPDF);
-
-function printPDF() {
-    window.print(); // This triggers the browser's print dialog
-}
-
-document.addEventListener('DOMContentLoaded', loadExcelFile);
-document.getElementById('download-pdf').addEventListener('click', downloadPDF);
 
 function loadExcelFile() {
     const url = 'vikas.xlsx'; // Ensure this path is correct
