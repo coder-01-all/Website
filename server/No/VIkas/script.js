@@ -19,16 +19,3 @@ function loadExcelFile() {
         .catch(error => console.error('Error loading the Excel file:', error));
 }
 
-function downloadPDF() {
-    const element = document.getElementById('content');
-    html2pdf()
-        .from(element)
-        .set({
-            margin: 1,
-            filename: 'full-page.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-        })
-        .save();
-}
