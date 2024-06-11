@@ -52,7 +52,7 @@ function downloadPDF() {
             lineWidth: 0.1,
         },
         headStyles: {
-            fillColor: [211, 211, 211],
+            fillColor: [0, 251, 255],
         },
         alternateRowStyles: {
             fillColor: [255, 255, 255],
